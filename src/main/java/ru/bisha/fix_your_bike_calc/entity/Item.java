@@ -25,6 +25,10 @@ public class Item {
     @Column(name = "price")
     private int price;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Item(String name, String description, int price) {
         this.name = name;
         this.description = description;

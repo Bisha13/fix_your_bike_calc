@@ -1,13 +1,16 @@
 package ru.bisha.fix_your_bike_calc.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "item")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Item {
 
@@ -25,7 +28,7 @@ public class Item {
     @Column(name = "price")
     private int price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,  CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -34,4 +37,6 @@ public class Item {
         this.description = description;
         this.price = price;
     }
+
+
 }

@@ -5,10 +5,12 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
+<!--        TODO поменять тайтл-->
     </head>
 <body>
 <fieldset>
     <form th:action="@{/items/new}" th:object="${itemAtr}" method="post">
+        <input type="hidden" th:field="*{id}">
         Название <input th:type="text" th:field="*{name}">
         <br><br>
         Описание <input th:type="text" th:field="*{description}"><br><br>
@@ -17,6 +19,7 @@
 <!--        <datalist id="st">-->
             <option th:each="cat : ${allCategoriesAtr}" th:text="${cat.name}" th:value="${cat.id}"></option>
 <!--        </datalist>-->
+
         <input type="submit" value="Сохранить"/>
     </form>
 </fieldset>

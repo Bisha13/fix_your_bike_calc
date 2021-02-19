@@ -51,9 +51,11 @@ public class MyController {
     }
 
     @GetMapping("/update")
-    public String updateItem(@RequestParam("empId") int id, Model model) {
+    public String updateItem(@RequestParam("itemId") int id, Model model) {
         Item item = itemService.getItem(id);
+        List<Category> allCategories = categoryService.getAllCategories();
         model.addAttribute("itemAtr", item);
+        model.addAttribute("allCategoriesAtr", allCategories);
         return "item_info";
     }
 

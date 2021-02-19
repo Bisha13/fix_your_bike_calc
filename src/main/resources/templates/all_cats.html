@@ -56,10 +56,16 @@
             <div class="point" th:text="${item.name}"></div>
             <div class="price" th:text="${item.price}">3000</div>
             <div>
-
                 <form th:method="get" th:action="@{/items/delete}">
                     <input type="hidden" th:value="${item.id}" th:name="itemId">
                     <button type="submit" value="Удалить"/>Удалить</button>
+                </form>
+            </div>
+            <div>
+                <form th:method="get" th:action="@{/items/update}">
+                    <input type="hidden" th:value="${item.id}" th:name="itemId">
+                    <input type="hidden" th:value="${item.category}">
+                    <button type="submit" value="Изменить"/>Изменить</button>
                 </form>
             </div>
             <p class="panel" th:text="${item.description}"></p>

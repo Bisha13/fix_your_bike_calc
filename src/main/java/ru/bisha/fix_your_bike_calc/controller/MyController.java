@@ -57,8 +57,8 @@ public class MyController {
         return "item_info";
     }
 
-    @GetMapping("/delete")
-    public String deleteItem(@RequestParam("empId") int id) {
+    @GetMapping("/delete/{id}")
+    public String deleteItem(@PathVariable int id) {
         itemService.deleteItem(id);
         return "redirect:/items";
     }

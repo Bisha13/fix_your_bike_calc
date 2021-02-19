@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!--        TODO поменять тайтл-->
 </head>
 <body>
 
@@ -54,6 +55,13 @@
             <div><input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()"></div>
             <div class="point" th:text="${item.name}"></div>
             <div class="price" th:text="${item.price}">3000</div>
+            <div>
+
+                <form th:method="get" th:action="@{/items/delete/{Id}(Id=${item.id})}">
+                    <input type="hidden" th:value="${item.id}">
+                    <button type="submit" value="Удалить"/>Удалить</button>
+                </form>
+            </div>
             <p class="panel" th:text="${item.description}"></p>
         </div>
     </div>

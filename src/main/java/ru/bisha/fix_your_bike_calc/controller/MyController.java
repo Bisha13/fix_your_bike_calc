@@ -3,10 +3,7 @@ package ru.bisha.fix_your_bike_calc.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.bisha.fix_your_bike_calc.entity.Category;
 import ru.bisha.fix_your_bike_calc.entity.Item;
 import ru.bisha.fix_your_bike_calc.service.CategoryService;
@@ -39,17 +36,30 @@ public class MyController {
     }
 
     @GetMapping("/new")
-    public String addItem(Model model) {
+    public String addNewItem(Model model) {
         Item item = new Item();
         List<Category> allCategories = categoryService.getAllCategories();
         model.addAttribute("allCategoriesAtr", allCategories);
         model.addAttribute("itemAtr", item);
-        return "item";
+        return "item_info";
     }
 
     @PostMapping("/new")
     public String saveItem(@ModelAttribute("itemAtr") Item item) {
         itemService.saveItem(item);
+        return "redirect:/items";
+    }
+
+    @GetMapping("/update")
+    public String updateItem(@RequestParam("empId") int id, Model model) {
+        Item item = itemService.getItem(id);
+        model.addAttribute("itemAtr", item);
+        return "item_info";
+    }
+
+    @GetMapping("/delete")
+    public String deleteItem(@RequestParam("empId") int id) {
+        itemService.deleteItem(id);
         return "redirect:/items";
     }
 }

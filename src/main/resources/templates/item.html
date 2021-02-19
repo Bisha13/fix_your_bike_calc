@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+<body>
+<fieldset>
+    <form th:action="@{/items/new}" th:object="${itemAtr}" method="post">
+        Название <input th:type="text" th:field="*{name}">
+        <br><br>
+        Описание <input th:type="text" th:field="*{description}"><br><br>
+        Цена <input th:type="text" th:field="*{price}"><br><br>
+        Категория <select th:field="*{category}"/><br><br>
+<!--        <datalist id="st">-->
+            <option th:each="cat : ${allCategoriesAtr}" th:text="${cat.name}" th:value="${cat.id}"></option>
+<!--        </datalist>-->
+        <input type="submit" value="Сохранить"/>
+    </form>
+</fieldset>
+</body>
+</html>

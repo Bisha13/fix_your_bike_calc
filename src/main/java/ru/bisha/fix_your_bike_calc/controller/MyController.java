@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bisha.fix_your_bike_calc.entity.Category;
 import ru.bisha.fix_your_bike_calc.entity.Item;
@@ -43,5 +45,11 @@ public class MyController {
         model.addAttribute("allCategoriesAtr", allCategories);
         model.addAttribute("itemAtr", item);
         return "item";
+    }
+
+    @PostMapping("/new")
+    public String saveItem(@ModelAttribute("itemAtr") Item item) {
+        itemService.saveItem(item);
+        return "redirect:/items";
     }
 }

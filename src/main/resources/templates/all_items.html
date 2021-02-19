@@ -30,6 +30,8 @@
     .price {
         width: 50px;
     }
+
+
 </style>
 
 
@@ -39,38 +41,31 @@
 </head>
 <body>
 
+
 <fieldset>
-<div class="row" th:each="item : ${allItemsAtr}">
-    <div class="point">
-        <input type="checkbox" class="checkBox" th:text="${item.name}" th:value="${item.price}">
+    <div class="list_of_items">
+        <div class="row" th:each="item : ${allItemsAtr}">
+            <div><input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="alerted()"></div>
+            <div class="point" th:text="${item.name}"></div>
+            <div class="price" th:text="${item.price}">3000</div>
+            <p class="panel" th:text="${item.description}"></p>
+        </div>
     </div>
-    <!--            <div class="panel">-->
-    <!--            </div>-->
-    <div class="price" th:text="${item.price}"></div>
-    <p class="panel" th:text="${item.description}"></p>
-
-
-</div>
 </fieldset>
-<button onclick="alerted();"> Кто выбран? </button>
-<p id="result">Тест</p>
+
+<br>
+<p id="result">Сумма</p>
 <script>
-function alerted(){
-    var checkboxes = document.getElementsByClassName('checkBox');
-    var checkboxesChecked = []; // можно в массиве их хранить, если нужно использовать
-    for (var index = 0; index < checkboxes.length; index++) {
-        if (checkboxes[index].checked) {
-            checkboxesChecked.push(checkboxes[index].value); // положим в массив выбранный
-            //alert(checkboxes[index].value); // делайте что нужно - это для наглядности
+    function alerted() {
+        let checkboxes = document.getElementsByTagName('input');
+        let sum = 0;
+        for (let index = 0; index < checkboxes.length; index++) {
+            if (checkboxes[index].checked) {
+                sum += parseInt(checkboxes[index].value);
+                document.getElementById("result").innerHTML = 'Сумма: ' + sum + ' Рублей.';
+            }
         }
     }
-    let sum = 0;
-    for (let i = 0; i < checkboxesChecked.length; i++) {
-        sum+=parseInt(checkboxesChecked[i]);
-    }
-    document.getElementById("result").innerHTML = '' + sum;
-    //alert(sum); // для использования в нужном месте
-}
 </script>
 
 <script>
@@ -83,10 +78,8 @@ function alerted(){
             var panel = this.nextElementSibling.nextElementSibling;
             if (panel.style.maxHeight) {
                 panel.style.maxHeight = null;
-                this.children[0].removeAttribute('checked');
             } else {
                 panel.style.maxHeight = panel.scrollHeight + "px";
-                this.children[0].setAttribute('checked', 'checked');
             }
         });
     }

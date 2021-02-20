@@ -4,8 +4,8 @@
 <head>
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
-<!--        TODO поменять тайтл-->
+        <title>Редактировать услугу</title>
+<!--        TODO Прикрутить дизайн приятней-->
     </head>
 <body>
 <fieldset>
@@ -16,10 +16,8 @@
         Описание <input th:type="text" th:field="*{description}"><br><br>
         Цена <input th:type="text" th:field="*{price}"><br><br>
         Категория <select th:field="*{category}"/><br><br>
-<!--        <datalist id="st">-->
-            <option th:each="cat : ${allCategoriesAtr}" th:text="${cat.name}" th:value="${cat.id}"></option>
-<!--        </datalist>-->
 
+            <option th:each="cat : ${allCategoriesAtr}" th:text="${cat.name}" th:value="${cat.id}"></option>
         <input type="submit" value="Сохранить"/>
     </form>
 </fieldset>

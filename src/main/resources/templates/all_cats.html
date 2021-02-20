@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--        TODO поменять тайтл-->
+    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.panel').hide();
+            $('.hiding-block').hide();
+            });
+    </script>
+
 </head>
 <body>
 
@@ -12,7 +20,7 @@
     .panel {
         padding: 0 18px;
         background-color: white;
-        max-height: 0;
+        /*max-height: 0;*/
         overflow: hidden;
         transition: max-height 0.2s ease-out;
         margin: 5px;
@@ -36,51 +44,57 @@
         width: 50px;
     }
 
+    /*.hiding-block {*/
+    /*    transition: max-height 0.2s ease-out;*/
+    /*    max-height: 0;*/
+    /*}*/
+
 
 </style>
 
-<!--<ul th:each="cat : ${allCategoriesAtr}">-->
-<!--    <li th:text="${cat.name}">Пункт 1.</li>-->
-<!--    <ul th:each="item : ${cat.items}">-->
-<!--        <li th:text="${item.name}">Подпункт 2.1.</li>-->
-<!--        <li th:text="${item.price}">Подпункт 2.2.</li>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</ul>-->
 
 <fieldset>
-    <div class="category" th:each="cat : ${allCategoriesAtr}">
-        <h3 th:text="${cat.name}"></h3>
-        <div class="row" th:each="item : ${cat.items}">
-            <div><input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()"></div>
-            <div class="point" th:text="${item.name}"></div>
-            <div class="price" th:text="${item.price}">3000</div>
-            <div>
-                <form th:method="get" th:action="@{/items/delete}">
-                    <input type="hidden" th:value="${item.id}" th:name="itemId">
-                    <button type="submit" value="Удалить"/>Удалить</button>
-                </form>
+    <container>
+        <div class="category" th:each="cat : ${allCategoriesAtr}">
+            <h3 class="hide-button" th:text="${cat.name}"
+                onclick="$(this).next().slideToggle('fast')"></h3>
+            <div class="hiding-block">
+                <div class="row" th:each="item : ${cat.items}">
+                    <div>
+                        <input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()">
+                    </div>
+                    <div class="point" th:text="${item.name}"
+                         onclick="$(this).siblings('.panel').slideToggle('fast')"></div>
+                    <div class="price" th:text="${item.price}">3000</div>
+
+                    <div>
+                        <form th:method="get" th:action="@{/items/delete}">
+                            <input type="hidden" th:value="${item.id}" th:name="itemId">
+                            <button type="submit" value="Удалить"/>
+                            Удалить</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form th:method="get" th:action="@{/items/update}">
+                            <input type="hidden" th:value="${item.id}" th:name="itemId">
+                            <input type="hidden" th:value="${item.category}">
+                            <button type="submit" value="Изменить"/>
+                            Изменить</button>
+                        </form>
+                    </div>
+
+                    <p class="panel" th:text="${item.description}"></p>
+
+                </div>
             </div>
-            <div>
-                <form th:method="get" th:action="@{/items/update}">
-                    <input type="hidden" th:value="${item.id}" th:name="itemId">
-                    <input type="hidden" th:value="${item.category}">
-                    <button type="submit" value="Изменить"/>Изменить</button>
-                </form>
-            </div>
-            <p class="panel" th:text="${item.description}"></p>
         </div>
-    </div>
+    </container>
 </fieldset>
 
 
 <br>
 <p id="result">Сумма</p>
 <br>
-
-
-
-
 
 
 <script>
@@ -94,24 +108,27 @@
             }
         }
     }
+
     //todo когда ничего не отмечено, делать ноль
 </script>
+<!--<script>-->
+<!--    var acc = document.getElementsByClassName("point");-->
+<!--    var i;-->
 
-<script>
-    var acc = document.getElementsByClassName("point");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
-</script>
+<!--    for (i = 0; i < acc.length; i++) {-->
+<!--        acc[i].addEventListener("click", function () {-->
+<!--            this.classList.toggle("active");-->
+<!--            var panel = this.nextElementSibling-->
+<!--                .nextElementSibling-->
+<!--                .nextElementSibling-->
+<!--                .nextElementSibling; //wow, this is fantastic-->
+<!--            if (panel.style.maxHeight) {-->
+<!--                panel.style.maxHeight = null;-->
+<!--            } else {-->
+<!--                panel.style.maxHeight = panel.scrollHeight + "px";-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
 </body>
 </html>

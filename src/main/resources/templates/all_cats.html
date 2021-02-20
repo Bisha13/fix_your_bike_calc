@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--        TODO поменять тайтл-->
+<!--    //TODO Сделать более приятный дизайн-->
     <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -44,11 +45,6 @@
         width: 50px;
     }
 
-    /*.hiding-block {*/
-    /*    transition: max-height 0.2s ease-out;*/
-    /*    max-height: 0;*/
-    /*}*/
-
 
 </style>
 
@@ -56,6 +52,7 @@
 <fieldset>
     <container>
         <div class="category" th:each="cat : ${allCategoriesAtr}">
+<!--            //TODO Более адекватный дизайн кнопки-->
             <h3 class="hide-button" th:text="${cat.name}"
                 onclick="$(this).next().slideToggle('fast')"></h3>
             <div class="hiding-block">
@@ -63,10 +60,10 @@
                     <div>
                         <input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()">
                     </div>
-                    <div class="point" th:text="${item.name}"
-                         onclick="$(this).siblings('.panel').slideToggle('fast')"></div>
+                    <div class="point" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')"></div>
                     <div class="price" th:text="${item.price}">3000</div>
 
+<!--                    //TODO прикрутить security-->
                     <div>
                         <form th:method="get" th:action="@{/items/delete}">
                             <input type="hidden" th:value="${item.id}" th:name="itemId">
@@ -105,30 +102,11 @@
             if (checkboxes[index].checked) {
                 sum += parseInt(checkboxes[index].value);
                 document.getElementById("result").innerHTML = 'Сумма: ' + sum + ' Рублей.';
-            }
+            } else
+                document.getElementById("result").innerHTML = 'Сумма: ' + sum + ' Рублей.';
         }
     }
-
-    //todo когда ничего не отмечено, делать ноль
 </script>
-<!--<script>-->
-<!--    var acc = document.getElementsByClassName("point");-->
-<!--    var i;-->
 
-<!--    for (i = 0; i < acc.length; i++) {-->
-<!--        acc[i].addEventListener("click", function () {-->
-<!--            this.classList.toggle("active");-->
-<!--            var panel = this.nextElementSibling-->
-<!--                .nextElementSibling-->
-<!--                .nextElementSibling-->
-<!--                .nextElementSibling; //wow, this is fantastic-->
-<!--            if (panel.style.maxHeight) {-->
-<!--                panel.style.maxHeight = null;-->
-<!--            } else {-->
-<!--                panel.style.maxHeight = panel.scrollHeight + "px";-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-<!--</script>-->
 </body>
 </html>

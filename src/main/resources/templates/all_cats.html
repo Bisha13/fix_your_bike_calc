@@ -1,11 +1,11 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>EasyRide calculator</title>
 <!--    //TODO Сделать более приятный дизайн-->
-    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.panel').hide();
@@ -47,7 +47,12 @@
 
 </style>
 
-
+<div sec:authorize="!isAuthenticated()">
+    <li><a th:href="@{/login}">Sign in</a></li>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <li><a th:href="@{/logout}">Logout (<span sec:authentication="principal.username"/>)</a></li>
+</div>
 <fieldset>
     <container>
         <div class="category" th:each="cat : ${allCategoriesAtr}">
@@ -59,18 +64,20 @@
                     <div>
                         <input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()">
                     </div>
-                    <div class="point" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')"></div>
+                    <div class="point" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')">
+
+                    </div>
                     <div class="price" th:text="${item.price}">3000</div>
 
 <!--                    //TODO прикрутить security-->
-                    <div>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <form th:method="get" th:action="@{/items/delete}">
                             <input type="hidden" th:value="${item.id}" th:name="itemId">
                             <button type="submit" value="Удалить"/>
                             Удалить</button>
                         </form>
                     </div>
-                    <div>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <form th:method="get" th:action="@{/items/update}">
                             <input type="hidden" th:value="${item.id}" th:name="itemId">
                             <input type="hidden" th:value="${item.category}">

@@ -17,10 +17,38 @@
 <body>
 
 <style>
+    .hide-button {
+        height: auto;
+        text-align: Left;
+        list-style: none;
+        font:20px "Bonveno", "Century Gothic";
+        padding: 10px;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 0 rgba(255,255,255, .9) inset, 0 1px 3px rgba(0,0,0, .1);
+        border-radius: 3px;
+        margin: 2px 2px 2px 10px;
+    }
+
+    .hiding-block {
+        height: auto;
+        text-align: Left;
+        list-style: none;
+        padding: 10px;
+        margin: 2px 2px 2px 10px;
+    }
+
+    .hide-button:hover {
+        background: #e8e8e8;
+    }
+
+    .row:hover {
+        background: #e8e8e8;
+    }
+
     .panel {
         padding: 0 18px;
-        background-color: white;
-        /*max-height: 0;*/
+        width: 90%;
         overflow: hidden;
         transition: max-height 0.2s ease-out;
         margin: 5px;
@@ -28,43 +56,60 @@
 
     .row div {
         display: inline-block;
-        border: 1px solid blue;
-        padding: 10px 5px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
-    .panel {
-        width: 600px
+    .item-checkbox {
+        margin-left: 5px;
     }
 
-    .point {
-        width: 600px
+    .item-name {
+        width: 80%
     }
 
     .price {
-        width: 50px;
+        width: 35px;
+        float: right;
+    }
+
+    .result {
+        margin-left: 10px;
+    }
+
+    body{
+        background: #c4c7cb;
+        background-image: -webkit-radial-gradient(cover, #FFF,#D1D1D1	);
+        background-image: -moz-radial-gradient(cover, #e8eaec, #a4a8ae);
+        background-image: -o-radial-gradient(cover, #e8eaec, #a4a8ae);
+        background-image: radial-gradient(cover, #e8eaec, #a4a8ae)
     }
 
 
 </style>
 
-<div sec:authorize="!isAuthenticated()">
-    <li><a th:href="@{/login}">Sign in</a></li>
-</div>
+<!--<div sec:authorize="!isAuthenticated()">-->
+<!--    <li><a th:href="@{/login}">Sign in</a></li>-->
+<!--</div>-->
 <div sec:authorize="isAuthenticated()">
-    <li><a th:href="@{/logout}">Logout (<span sec:authentication="principal.username"/>)</a></li>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </div>
-<fieldset>
+<br>
+
     <container>
         <div class="category" th:each="cat : ${allCategoriesAtr}">
 <!--            //TODO Более адекватный дизайн кнопки-->
             <h3 class="hide-button" th:text="${cat.name}"
-                onclick="$(this).next().slideToggle('fast')"></h3>
+                onclick="$(this).siblings('.hiding-block').slideToggle('fast')"></h3>
+
             <div class="hiding-block">
                 <div class="row" th:each="item : ${cat.items}">
                     <div>
                         <input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()">
                     </div>
-                    <div class="point" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')">
+                    <div class="item-name" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')">
 
                     </div>
                     <div class="price" th:text="${item.price}">3000</div>
@@ -92,11 +137,10 @@
             </div>
         </div>
     </container>
-</fieldset>
 
 
-<br>
-<p id="result">Сумма</p>
+
+<h3 id="result" class="result">Сумма 0 рублей</h3>
 <br>
 
 

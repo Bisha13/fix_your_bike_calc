@@ -12,7 +12,7 @@ import ru.bisha.fix_your_bike_calc.service.ItemService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/items")
+@RequestMapping("/")
 public class MyController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class MyController {
     @PostMapping("/new")
     public String saveItem(@ModelAttribute("itemAtr") Item item) {
         itemService.saveItem(item);
-        return "redirect:/items";
+        return "redirect:/";
     }
 
     @GetMapping("/update")
@@ -62,6 +62,6 @@ public class MyController {
     @GetMapping("/delete")
     public String deleteItem(@RequestParam("itemId") int id) {
         itemService.deleteItem(id);
-        return "redirect:/items";
+        return "redirect:/";
     }
 }

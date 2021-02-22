@@ -2,9 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EasyRide calculator</title>
-<!--    //TODO Сделать более приятный дизайн-->
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -100,7 +99,6 @@
 
     <container>
         <div class="category" th:each="cat : ${allCategoriesAtr}">
-<!--            //TODO Более адекватный дизайн кнопки-->
             <h3 class="hide-button" th:text="${cat.name}"
                 onclick="$(this).siblings('.hiding-block').slideToggle('fast')"></h3>
 

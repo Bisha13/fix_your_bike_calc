@@ -16,6 +16,11 @@
 <body>
 
 <style>
+
+    .category {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
     .hide-button {
         height: auto;
         text-align: Left;
@@ -26,15 +31,15 @@
         border: 1px solid #ccc;
         box-shadow: 0 1px 0 rgba(255,255,255, .9) inset, 0 1px 3px rgba(0,0,0, .1);
         border-radius: 3px;
-        margin: 2px 2px 2px 10px;
+        margin: 2px;
     }
 
     .hiding-block {
         height: auto;
         text-align: Left;
         list-style: none;
-        padding: 10px;
-        margin: 2px 2px 2px 10px;
+        padding: 10px 1px 10px 1px;
+        margin: 2px 2px 2px 2px;
     }
 
     .hide-button:hover {
@@ -47,6 +52,7 @@
 
     .panel {
         padding: 0 18px;
+        padding-bottom: 8px;
         width: 90%;
         overflow: hidden;
         transition: max-height 0.2s ease-out;
@@ -60,11 +66,18 @@
     }
 
     .item-checkbox {
+        display: inline-block;
         margin-left: 5px;
     }
 
     .item-name {
-        width: 80%
+        width: 70%;
+        font-size: 0.45cm;
+    }
+
+    .item-name.active{
+        width: 70%;
+        font-weight: 600;
     }
 
     .price {
@@ -107,7 +120,9 @@
                     <div>
                         <input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()">
                     </div>
-                    <div class="item-name" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')">
+<!--                    <div class="item-name" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')">-->
+                    <div class="item-name" th:text="${item.name}" onclick="$(this).toggleClass('active')
+                    .siblings('.panel').slideToggle('slow')">
 
                     </div>
                     <div class="price" th:text="${item.price}">3000</div>
@@ -140,8 +155,6 @@
 
 <h3 id="result" class="result">Сумма 0 рублей</h3>
 <br>
-
-
 <script>
     function calculate() {
         let checkboxes = document.getElementsByTagName('input');

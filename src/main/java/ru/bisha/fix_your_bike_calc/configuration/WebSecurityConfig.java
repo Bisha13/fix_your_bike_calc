@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 
 @Configuration
@@ -28,7 +28,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and().headers().defaultsDisabled()
+                .and()
+                .cors()
+                .and()
+                .headers()
+                .cacheControl()
+                .and()
+                .contentTypeOptions()
+                .and()
+                .httpStrictTransportSecurity().disable()
+                .and()
+                .headers()
+                .frameOptions().disable()
+                .addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS",
+                        "ALLOW-FROM localhost",
+                        "ALLOW-FROM easyridecycle.ru/",
+                        "ALLOW-FROM example3.com",
+                        "ALLOW-FROM example4.com",
+                        "ALLOW-FROM example5.com"));
     }
 
     @Autowired

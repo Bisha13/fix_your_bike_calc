@@ -100,9 +100,9 @@
 
 </style>
 
-<!--<div sec:authorize="!isAuthenticated()">-->
-<!--    <li><a th:href="@{/login}">Sign in</a></li>-->
-<!--</div>-->
+<div sec:authorize="!isAuthenticated()">
+    <li><a th:href="@{/login}">Sign in</a></li>
+</div>
 <div sec:authorize="isAuthenticated()">
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
@@ -128,15 +128,15 @@
                     <div class="price" th:text="${item.price}">3000</div>
 
 <!--                    //TODO прикрутить security-->
+<!--                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">-->
+<!--                        <form th:method="get" th:action="@{/delete}">-->
+<!--                            <input type="hidden" th:value="${item.id}" th:name="itemId">-->
+<!--                            <button type="submit" value="Удалить"/>-->
+<!--                            Удалить</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
                     <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                        <form th:method="get" th:action="@{/items/delete}">
-                            <input type="hidden" th:value="${item.id}" th:name="itemId">
-                            <button type="submit" value="Удалить"/>
-                            Удалить</button>
-                        </form>
-                    </div>
-                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                        <form th:method="get" th:action="@{/items/update}">
+                        <form th:method="get" th:action="@{/update}">
                             <input type="hidden" th:value="${item.id}" th:name="itemId">
                             <input type="hidden" th:value="${item.category}">
                             <button type="submit" value="Изменить"/>

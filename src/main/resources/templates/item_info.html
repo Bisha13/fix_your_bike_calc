@@ -9,7 +9,7 @@
     </head>
 <body>
 <fieldset>
-    <form th:action="@{/items/new}" th:object="${itemAtr}" method="post">
+    <form th:action="@{/new}" th:object="${itemAtr}" method="post">
         <input type="hidden" th:field="*{id}">
         Название <input th:type="text" th:field="*{name}">
         <br><br>

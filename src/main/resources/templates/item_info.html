@@ -5,21 +5,69 @@
     <head>
         <meta charset="UTF-8">
         <title>Редактировать услугу</title>
-<!--        TODO Прикрутить дизайн приятней-->
     </head>
 <body>
+<style>
+    .field {
+        clear: both;
+        text-align: right;
+        padding-bottom: 5px;
+        line-height:25px;
+    }
+    label {
+        float: left;
+        padding-right:10px;
+    }
+    .mainContainer {
+        float: left;
+    }
+    textarea {
+        min-width: 200px;
+        max-width: 300px;
+
+    }
+
+    input {
+        width: 200px;
+    }
+
+    
+</style>
 <fieldset>
+    <div class="mainContainer">
     <form th:action="@{/new}" th:object="${itemAtr}" method="post">
         <input type="hidden" th:field="*{id}">
-        Название <input th:type="text" th:field="*{name}">
-        <br><br>
-        Описание <input th:type="text" th:field="*{description}"><br><br>
-        Цена <input th:type="text" th:field="*{price}"><br><br>
-        Категория <select th:field="*{category}"/><br><br>
 
+        <div class="field">
+            <label for="name-field">Название </label>
+            <input id="name-field" th:type="text" th:field="*{name}">
+        </div>
+
+
+        <div class="field">
+            <label for="desc-field">Описание </label>
+            <textarea id="desc-field" th:type="text" th:field="*{description}"></textarea>
+        </div>
+
+
+        <div class="field">
+            <label for="price-field">Цена </label>
+            <input id="price-field" th:type="text" th:field="*{price}">
+        </div>
+
+        <div class="field">
+            <label for="cat-field">Категория </label>
+            <select id="cat-field" th:field="*{category}"/>
             <option th:each="cat : ${allCategoriesAtr}" th:text="${cat.name}" th:value="${cat.id}"></option>
+        </div>
+        <input type="hidden">
+
+
+<br>
+<br>
         <input type="submit" value="Сохранить"/>
     </form>
+    </div>
 </fieldset>
 </body>
 </html>

@@ -86,7 +86,17 @@
     }
 
     .result {
+        float: right;
+        font-size: 1.5em;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background-color: #39e780;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 0 rgb(178, 205, 229) inset, 0 1px 3px rgba(179, 138, 138, 0.1);
+        padding: 10px;
         margin-left: 10px;
+        border-radius: 5px;
     }
 
     body{
@@ -153,7 +163,9 @@
 
 
 
-<h3 id="result" class="result">Сумма 0 рублей</h3>
+<div id="result" class="result">Сумма 0 рублей</div>
+
+
 <br>
 <script>
     function calculate() {

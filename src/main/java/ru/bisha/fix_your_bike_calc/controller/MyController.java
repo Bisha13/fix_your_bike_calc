@@ -13,7 +13,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class MyController {
+public final class MyController {
+
+    public static final String CATEGORIES_ATR = "allCategoriesAtr";
 
     @Autowired
     private ItemService itemService;
@@ -21,17 +23,10 @@ public class MyController {
     @Autowired
     private CategoryService categoryService;
 
-//    @GetMapping
-//    public String showAllItems(Model model) {
-//        List<Item> allItems = itemService.getAllItems();
-//        model.addAttribute("allItemsAtr", allItems);
-//        return "all_items";
-//    }
-
     @GetMapping
     public String showAllCategories(Model model) {
         List<Category> allCategories = categoryService.getAllCategories();
-        model.addAttribute("allCategoriesAtr", allCategories);
+        model.addAttribute(CATEGORIES_ATR, allCategories);
         return "all_cats";
     }
 
@@ -39,7 +34,7 @@ public class MyController {
     public String addNewItem(Model model) {
         Item item = new Item();
         List<Category> allCategories = categoryService.getAllCategories();
-        model.addAttribute("allCategoriesAtr", allCategories);
+        model.addAttribute(CATEGORIES_ATR, allCategories);
         model.addAttribute("itemAtr", item);
         return "item_info";
     }
@@ -55,7 +50,7 @@ public class MyController {
         Item item = itemService.getItem(id);
         List<Category> allCategories = categoryService.getAllCategories();
         model.addAttribute("itemAtr", item);
-        model.addAttribute("allCategoriesAtr", allCategories);
+        model.addAttribute(CATEGORIES_ATR, allCategories);
         return "item_info";
     }
 

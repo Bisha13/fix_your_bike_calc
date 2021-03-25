@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background: #2A363F;
+
+}
+div.loginContainer {
+    display: flex;
+    height: 100vh;
+}
+div.row {
+    height: 250px;
+    margin: auto;
+    width: 100%;
+    display: flex;
+}
+.col-left {width: 45%}
+.col-right {width: 55%}
+
+.middleLine {
+    border-left: 1px solid #5B666B;
+    height: 100%;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #2A363F inset;
+}
+div.col-right form input.inputField {
+    background: #2A363F;
+    border: 1px solid #5B666B;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 15px;
+    color: #fff;
+}
+div.col-right form input.inputField:focus {
+    border: 1px solid #5B666B;
+}

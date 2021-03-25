@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EasyRide calculator</title>
+    <link rel="stylesheet" th:href ="@{/css/main.css}">
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -14,104 +15,6 @@
 
 </head>
 <body>
-
-<style>
-
-    .category {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    .hide-button {
-        height: auto;
-        text-align: Left;
-        list-style: none;
-        font:20px "Bonveno", "Century Gothic";
-        padding: 10px;
-        background-color: #eee;
-        border: 1px solid #ccc;
-        box-shadow: 0 1px 0 rgba(255,255,255, .9) inset, 0 1px 3px rgba(0,0,0, .1);
-        border-radius: 3px;
-        margin: 2px;
-    }
-
-    .hiding-block {
-        height: auto;
-        text-align: Left;
-        list-style: none;
-        padding: 10px 1px 10px 1px;
-        margin: 2px 2px 2px 2px;
-    }
-
-    .hide-button:hover {
-        background: #e8e8e8;
-    }
-
-    .row:hover {
-        background: #e8e8e8;
-    }
-
-    .panel {
-        padding: 0 18px;
-        padding-bottom: 8px;
-        width: 90%;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        margin: 5px;
-    }
-
-    .row div {
-        display: inline-block;
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
-
-    .item-checkbox {
-        display: inline-block;
-        margin-left: 5px;
-        transform:scale(1.3);
-        opacity:0.9;
-        cursor:pointer;
-    }
-
-    .item-name {
-        width: 70%;
-        font-size: 0.45cm;
-    }
-
-    .item-name.active{
-        width: 70%;
-        font-weight: 600;
-    }
-
-    .price {
-        width: 35px;
-        float: right;
-    }
-
-    .result {
-        float: right;
-        font-size: 1.5em;
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        background-color: #39e780;
-        border: 1px solid #ccc;
-        box-shadow: 0 1px 0 rgb(178, 205, 229) inset, 0 1px 3px rgba(179, 138, 138, 0.1);
-        padding: 10px;
-        margin-left: 10px;
-        border-radius: 5px;
-    }
-
-    body{
-        background: #c4c7cb;
-        background-image: -webkit-radial-gradient(cover, #FFF,#D1D1D1	);
-        background-image: -moz-radial-gradient(cover, #e8eaec, #a4a8ae);
-        background-image: -o-radial-gradient(cover, #e8eaec, #a4a8ae);
-        background-image: radial-gradient(cover, #e8eaec, #a4a8ae)
-    }
-
-
-</style>
 
 <div sec:authorize="!isAuthenticated()">
     <li><a th:href="@{/login}">Sign in</a></li>

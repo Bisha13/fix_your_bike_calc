@@ -3,34 +3,45 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>EasyRide login</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+     <link rel="stylesheet" th:href="@{/css/login.css}">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--       <link rel="stylesheet" href="/static/css/login.css">-->
 </head>
 <body>
 <div class="loginContainer">
-<div class="row">
-    <div class="col-left"></div>
-    <div class="middleLine"></div>
-    <div class="col-right">
+    <div class="row">
 
-        <div class="errorText" th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div class="infoText" th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><input class="inputField" type="text" name="username" placeholder="Login"/> </label></div>
-            <br>
-            <div><input class="inputField" type="password" name="password" placeholder="Password"/> </label></div>
-            <br>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-        <br>
-        <br>
-        <a href="/">Домой</a>
+            <div class="col-left">
+                <div class="col-left-img">
+                     <img class="bike-logo" th:src="@{/img/logo-ch.png}" alt="bike logo">
+<!--                    <img class="bike-logo" src="/static/img/imageonline-co-edited.png" alt="bike logo">-->
+                </div>
+            </div>
+            <div class="middleLine"></div>
+            <div class="col-right">
+                <div class="loginForm">
+                    <form th:action="@{/login}" method="post">
+                        <div><input class="inputField" type="text" name="username" placeholder="Login"/> </label></div>
+                        <br>
+                        <div><input class="inputField" type="password" name="password" placeholder="Password"/> </label>
+                        </div>
+                        <br>
+                        <div><input type="submit" value="Sign In"/></div>
+                    </form>
+                    <br>
+                    <div class="errorText" th:if="${param.error}">
+                        Invalid username and password.
+                    </div>
+                    <div class="infoText" th:if="${param.logout}">
+                        You have been logged out.
+                    </div>
+                    <br>
+                    <a class="homeLink" href="/">Вернуться на главную</a>
+                </div>
+            </div>
+
+
     </div>
-
-</div>
 </div>
 </body>
 </html>

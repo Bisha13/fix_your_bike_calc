@@ -20,17 +20,25 @@ div.row {
     border-left: 1px solid #5B666B;
     height: 100%;
 }
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #2A363F inset;
+div.col-right form input.inputField:-webkit-autofill,
+div.col-right form input.inputField:-webkit-autofill:hover, 
+div.col-right form input.inputField:-webkit-autofill:focus
+ {
+  border: 1px solid #6ED9A0;
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px #2A363F inset;  
 }
 div.col-right form input.inputField {
     background: #2A363F;
     border: 1px solid #5B666B;
-    border-radius: 3px;
+    border-radius: 4px;
     padding: 10px;
     font-size: 15px;
     color: #fff;
 }
-div.col-right form input.inputField:focus {
-    border: 1px solid #5B666B;
-}
+div.col-right form input.inputField:focus{
+    outline: none;
+    border: 1px solid #6ED9A0;
+    box-shadow: 0 0 0px 1000px #2A363F inset;
+    color: #fff;
+} 

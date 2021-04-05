@@ -83,11 +83,16 @@
         let checkboxes = document.getElementsByTagName('input');
         let sum = 0;
         for (let index = 0; index < checkboxes.length; index++) {
-            if (checkboxes[index].checked) {
-                sum += parseInt(checkboxes[index].value);
+            let checkbox = checkboxes[index];
+            if (checkbox.checked) {
+                sum += parseInt(checkbox.value);
                 document.getElementById("result").innerHTML = 'Сумма: ' + sum + ' Рублей.';
-            } else
+            } else {
                 document.getElementById("result").innerHTML = 'Сумма: ' + sum + ' Рублей.';
+                let nextSibling = checkboxes[index].nextElementSibling;
+                if (nextSibling != undefined)
+                    nextSibling.checked = false;
+            }
         }
     }
 </script>

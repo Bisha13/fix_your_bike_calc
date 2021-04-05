@@ -32,6 +32,9 @@ public class Item {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Column(name = "priority")
+    private Integer priority;
+
     public Item(String name, String description, int price) {
         this.name = name;
         this.description = description;

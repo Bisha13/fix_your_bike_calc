@@ -21,6 +21,7 @@ public class Category {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OrderBy("priority")
     private List<Item> items;
 
     //TODO addItemToCategory

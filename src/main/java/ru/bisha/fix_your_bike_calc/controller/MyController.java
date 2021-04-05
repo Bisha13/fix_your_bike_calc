@@ -40,13 +40,13 @@ public final class MyController {
     }
 
     @PostMapping("/new")
-    public String saveItem(@ModelAttribute("itemAtr") Item item) {
+    public String saveItem(@ModelAttribute("itemAtr") final Item item) {
         itemService.saveItem(item);
         return "redirect:/";
     }
 
     @GetMapping("/update")
-    public String updateItem(@RequestParam("itemId") int id, Model model) {
+    public String updateItem(@RequestParam("itemId") final int id, final Model model) {
         Item item = itemService.getItem(id);
         List<Category> allCategories = categoryService.getAllCategories();
         model.addAttribute("itemAtr", item);
@@ -55,7 +55,7 @@ public final class MyController {
     }
 
     @GetMapping("/delete")
-    public String deleteItem(@RequestParam("itemId") int id) {
+    public String deleteItem(@RequestParam("itemId") final int id) {
         itemService.deleteItem(id);
         return "redirect:/";
     }

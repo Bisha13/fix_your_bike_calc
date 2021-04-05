@@ -33,12 +33,17 @@
 
             <div class="hiding-block">
                 <div class="row" th:each="item : ${cat.items}">
-                    <div>
-                        <input type="checkbox" class="item-checkbox" th:value="${item.price}" onclick="calculate()">
-                    </div>
+                    <div><input type="checkbox" class="item-checkbox" th:value="${item.price}"
+                               onclick="$(this).next().slideToggle('fast');calculate()">
+                        <input type="checkbox" class="item-checkbox toggle" id="hidingCheckbox" th:value="${item.price}" onclick="calculate()"
+                        style="display: none"></div>
+<!--                               onclick="calculate()"-->
+
+
+
 <!--                    <div class="item-name" th:text="${item.name}" onclick="$(this).siblings('.panel').slideToggle('fast')">-->
                     <div class="item-name" th:text="${item.name}" onclick="$(this).toggleClass('active')
-                    .siblings('.panel').slideToggle('slow')">
+                    .siblings('.panel').slideToggle('fast')">
 
                     </div>
                     <div class="price" th:text="${item.price}">3000</div>
